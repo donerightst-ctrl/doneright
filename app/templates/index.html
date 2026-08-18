@@ -1,0 +1,36 @@
+from fastapi import FastAPI, Request, Form
+from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.templating import Jinja2Templates
+from app.api.v1.endpoints import auth
+from app.core.database import engine, Base
+
+app = FastAPI(title="ДОНРАЙТ", version="1.0.0")
+
+templates = Jinja2Templates(directory="app/templates")
+
+@app.on_event("startup")
+async def startup():
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+
+app.include_router(auth.router)
+
+@app.get("/", response_class=HTMLResponse)
+async def home(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
+
+@app.post("/submit-form")
+async def submit_form(
+    name: str = Form(...),
+    phone: str = Form(...),
+    address: str = Form(""),
+    message: str = Form("")
+):
+    print(f"📩 НОВАЯ ЗАЯВКА!")
+    print(f"Имя: {name}")
+    print(f"Телефон: {phone}")
+    print(f"Адрес: {address}")
+    print(f"Задача: {message}")
+    print("-" * 30)
+    
+    return RedirectResponse(url="/#form", status_code=303)
