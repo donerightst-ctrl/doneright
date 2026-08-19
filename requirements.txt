@@ -1,8 +1,13 @@
 fastapi
 uvicorn
 sqlalchemy
+alembic
 pydantic
+pydantic-settings
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart
+asyncpg
+email-validator
 jinja2
 aiosqlite
-passlib
-python-jose[cryptography]
