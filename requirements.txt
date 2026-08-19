@@ -5,3 +5,4 @@ pydantic
 jinja2
 aiosqlite
 passlib
+python-jose[cryptography]
