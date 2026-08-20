@@ -72,6 +72,36 @@ async def home(request: Request):
             line-height: 1.6;
             overflow-x: hidden;
         }
+
+        /* ===== ФОН С WAVE-ГРАФИКОЙ ===== */
+        .bg-wave {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .bg-wave svg {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            opacity: 0.05;
+        }
+        .bg-wave svg:first-child {
+            height: 60%;
+            opacity: 0.03;
+            animation: waveAnim 20s ease-in-out infinite;
+        }
+        @keyframes waveAnim {
+            0%, 100% { transform: translateX(0) scaleY(1); }
+            50% { transform: translateX(-5%) scaleY(0.8); }
+        }
+
         .bg-grid {
             position: fixed;
             top: 0;
@@ -80,8 +110,8 @@ async def home(request: Request):
             height: 100%;
             z-index: 0;
             background-image: 
-                linear-gradient(rgba(255, 215, 0, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 215, 0, 0.03) 1px, transparent 1px);
+                linear-gradient(rgba(255, 215, 0, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 215, 0, 0.02) 1px, transparent 1px);
             background-size: 60px 60px;
             pointer-events: none;
         }
@@ -92,7 +122,7 @@ async def home(request: Request):
             width: 140%;
             height: 140%;
             z-index: 0;
-            background: radial-gradient(ellipse at 30% 40%, rgba(255, 215, 0, 0.04) 0%, transparent 60%);
+            background: radial-gradient(ellipse at 30% 40%, rgba(255, 215, 0, 0.05) 0%, transparent 60%);
             pointer-events: none;
             animation: pulseGlow 8s ease-in-out infinite;
         }
@@ -100,6 +130,7 @@ async def home(request: Request):
             0%, 100% { opacity: 0.5; transform: scale(1); }
             50% { opacity: 1; transform: scale(1.1); }
         }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -107,18 +138,53 @@ async def home(request: Request):
             position: relative;
             z-index: 1;
         }
+
+        /* ===== АНИМАЦИИ ===== */
         .fade-up {
             opacity: 0;
             transform: translateY(60px);
-            animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.25s; }
-        .delay-3 { animation-delay: 0.4s; }
-        .delay-4 { animation-delay: 0.55s; }
-        .delay-5 { animation-delay: 0.7s; }
-        .delay-6 { animation-delay: 0.85s; }
-        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.05s; }
+        .delay-2 { transition-delay: 0.15s; }
+        .delay-3 { transition-delay: 0.25s; }
+        .delay-4 { transition-delay: 0.35s; }
+        .delay-5 { transition-delay: 0.45s; }
+        .delay-6 { transition-delay: 0.55s; }
+
+        /* ===== 3D-НАКЛОН КАРТОЧЕК ===== */
+        .tilt-card {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transform-style: preserve-3d;
+            perspective: 800px;
+        }
+
+        /* ===== ЧАСТИЦЫ (интерактивные) ===== */
+        .particle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #FFD700;
+            border-radius: 50%;
+            opacity: 0.3;
+            transition: all 0.1s ease;
+        }
+
         @keyframes float {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
             50% { transform: translateY(-15px) rotate(2deg); }
@@ -131,6 +197,7 @@ async def home(request: Request):
             0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.1), 0 0 60px rgba(255, 215, 0, 0.05); }
             50% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.2), 0 0 80px rgba(255, 215, 0, 0.1); }
         }
+
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -184,6 +251,7 @@ async def home(request: Request):
         }
         .nav a:hover { color: #fff; }
         .nav a:hover::after { width: 100%; }
+
         .btn-gold {
             background: linear-gradient(135deg, #FFD700, #FF8C00);
             color: #0A0A0A;
@@ -214,6 +282,7 @@ async def home(request: Request):
         }
         .btn-gold:hover::before { opacity: 1; transform: scale(1); }
         .btn-gold:hover { transform: scale(1.05) translateY(-2px); box-shadow: 0 0 60px rgba(255, 215, 0, 0.3); }
+
         .hero {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -304,6 +373,7 @@ async def home(request: Request):
             font-weight: 600;
             margin-top: 20px;
         }
+
         .trust-counter {
             text-align: center;
             padding: 50px 0 70px;
@@ -318,6 +388,7 @@ async def home(request: Request):
             background-clip: text;
         }
         .trust-counter p { color: #9CA3AF; font-size: 18px; margin-top: 8px; }
+
         .why-section, .promo-section, .reviews-section, .steps-section, .faq-section, .trust-logos {
             padding: 70px 0;
             border-bottom: 1px solid rgba(255, 215, 0, 0.05);
@@ -330,6 +401,7 @@ async def home(request: Request):
             letter-spacing: -1.5px;
         }
         .section-title i { color: #FFD700; margin-right: 12px; }
+
         .why-grid, .promo-grid, .reviews-carousel, .steps-grid {
             display: grid;
             gap: 28px;
@@ -338,6 +410,7 @@ async def home(request: Request):
         .promo-grid { grid-template-columns: repeat(3, 1fr); }
         .reviews-carousel { grid-template-columns: repeat(3, 1fr); }
         .steps-grid { grid-template-columns: repeat(4, 1fr); }
+
         .why-card, .promo-card, .review-card, .step-card, .guarantee-card {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.04);
@@ -420,6 +493,7 @@ async def home(request: Request):
             font-weight: 600;
         }
         .review-card .author span { color: #FFD700; }
+
         .guarantees {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -444,6 +518,7 @@ async def home(request: Request):
             transition: opacity 0.4s ease;
         }
         .guarantee-card:hover::before { opacity: 1; }
+
         .faq-grid { max-width: 800px; margin: 0 auto; }
         .faq-item {
             background: rgba(255, 255, 255, 0.02);
@@ -478,6 +553,7 @@ async def home(request: Request):
         }
         .faq-item.active .answer { max-height: 300px; padding-top: 16px; }
         .faq-item.active .question .arrow { transform: rotate(180deg); }
+
         .logos-grid {
             display: flex;
             justify-content: center;
@@ -494,6 +570,7 @@ async def home(request: Request):
         }
         .logos-grid .logo-item.gold { color: #FFD700; }
         .logos-grid .logo-item:hover { color: #FFD700; }
+
         .contacts-wrapper {
             display: flex;
             justify-content: center;
@@ -523,9 +600,11 @@ async def home(request: Request):
         }
         .contact-link i { font-size: 22px; }
         .contact-link .label { color: #fff; }
+
         .form-section { padding: 90px 0; text-align: center; }
         .form-section h2 { font-size: 44px; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 12px; }
         .form-section .sub { color: #9CA3AF; font-size: 18px; margin-bottom: 44px; }
+
         .form-box {
             max-width: 560px;
             margin: 0 auto;
@@ -566,6 +645,7 @@ async def home(request: Request):
             margin-top: 20px;
             text-align: center;
         }
+
         .scroll-top {
             position: fixed;
             bottom: 30px;
@@ -586,6 +666,7 @@ async def home(request: Request):
         }
         .scroll-top.visible { opacity: 1; visibility: visible; }
         .scroll-top:hover { transform: scale(1.1); box-shadow: 0 0 50px rgba(255, 215, 0, 0.3); }
+
         .popup-overlay {
             display: none;
             position: fixed;
@@ -612,6 +693,7 @@ async def home(request: Request):
         .popup .icon { font-size: 72px; display: block; margin-bottom: 20px; }
         .popup h2 { color: #FFD700; font-size: 28px; font-weight: 800; margin-bottom: 12px; }
         .popup p { color: #9CA3AF; font-size: 16px; margin-bottom: 30px; }
+
         footer {
             padding: 32px 0;
             border-top: 1px solid rgba(255, 255, 255, 0.04);
@@ -624,15 +706,6 @@ async def home(request: Request):
         }
         footer a { color: #6B7280; text-decoration: none; transition: 0.3s; }
         footer a:hover { color: #FFD700; }
-
-        /* Кнопка для политики */
-        .policy-link {
-            color: #6B7280;
-            text-decoration: none;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-        .policy-link:hover { color: #FFD700; }
 
         @media (max-width: 768px) {
             .hero { grid-template-columns: 1fr; gap: 40px; padding: 40px 0 60px; }
@@ -658,13 +731,25 @@ async def home(request: Request):
 </head>
 <body>
 
-    <!-- ФОН -->
+    <!-- ===== WAVE-ГРАФИКА НА ФОНЕ ===== -->
+    <div class="bg-wave">
+        <svg viewBox="0 0 1200 200" preserveAspectRatio="none">
+            <path d="M0,150 C300,50 600,200 1200,100 L1200,200 L0,200 Z" fill="#FFD700"/>
+        </svg>
+        <svg viewBox="0 0 1200 200" preserveAspectRatio="none">
+            <path d="M0,120 C400,180 800,60 1200,140 L1200,200 L0,200 Z" fill="#FF8C00"/>
+        </svg>
+    </div>
+
+    <!-- ===== ИНТЕРАКТИВНЫЕ ЧАСТИЦЫ ===== -->
+    <div class="particle-container" id="particleContainer"></div>
+
     <div class="bg-grid"></div>
     <div class="bg-glow"></div>
 
     <div class="container">
         <!-- ШАПКА -->
-        <nav class="navbar fade-up">
+        <nav class="navbar fade-up visible">
             <div class="logo">✦ ДОНРАЙТ</div>
             <div class="nav">
                 <a href="#why"><i class="fas fa-star"></i>Почему мы</a>
@@ -677,7 +762,7 @@ async def home(request: Request):
 
         <!-- ГЕРОЙ -->
         <section class="hero">
-            <div class="fade-up delay-1">
+            <div class="fade-up visible delay-1">
                 <div class="city-tag"><i class="fas fa-map-pin"></i> Железногорск</div>
                 <div style="display: inline-block; background: rgba(255, 215, 0, 0.08); border: 1px solid rgba(255, 215, 0, 0.1); color: #FFD700; padding: 8px 24px; border-radius: 60px; font-weight: 600; font-size: 13px; letter-spacing: 0.5px; margin-bottom: 24px;">
                     <i class="fas fa-lock"></i> Оплата только после вашего одобрения
@@ -691,7 +776,7 @@ async def home(request: Request):
                     <div class="stat"><span>24 ч</span><p><i class="fas fa-clock" style="color: #FFD700; font-size: 12px;"></i> Гарантийный срок</p></div>
                 </div>
             </div>
-            <div class="hero-image fade-up delay-2">
+            <div class="hero-image fade-up visible delay-2">
                 <span class="big-icon">🛠️</span>
                 <h3>Ваша безопасность — наш приоритет</h3>
                 <p>Мастера в чистой обуви. Работаем строго по договору.</p>
@@ -699,8 +784,8 @@ async def home(request: Request):
             </div>
         </section>
 
-        <!-- СЧЁТЧИК ДОВЕРИЯ (ИСПРАВЛЕН) -->
-        <section class="trust-counter fade-up delay-2">
+        <!-- СЧЁТЧИК -->
+        <section class="trust-counter fade-up visible delay-2">
             <div class="number" id="counter">0</div>
             <p><i class="fas fa-users" style="color: #FFD700; margin-right: 8px;"></i>человек в Железногорске уже доверили нам свои задачи</p>
         </section>
@@ -709,10 +794,10 @@ async def home(request: Request):
         <section class="why-section" id="why">
             <h2 class="section-title fade-up"><i class="fas fa-gem"></i>Почему выбирают нас</h2>
             <div class="why-grid">
-                <div class="why-card fade-up delay-1"><span class="icon">⚡</span><h4>Быстро</h4><p>Приезжаем в течение часа. Работаем без задержек.</p></div>
-                <div class="why-card fade-up delay-2"><span class="icon">💎</span><h4>Надёжно</h4><p>Даём гарантию на все виды работ — 24 месяца.</p></div>
-                <div class="why-card fade-up delay-3"><span class="icon">🤝</span><h4>Честно</h4><p>Цена фиксируется до начала работ. Никаких сюрпризов.</p></div>
-                <div class="why-card fade-up delay-4"><span class="icon">🧹</span><h4>Аккуратно</h4><p>Работаем в чистой обуви. Убираем за собой.</p></div>
+                <div class="why-card tilt-card fade-up delay-1"><span class="icon">⚡</span><h4>Быстро</h4><p>Приезжаем в течение часа. Работаем без задержек.</p></div>
+                <div class="why-card tilt-card fade-up delay-2"><span class="icon">💎</span><h4>Надёжно</h4><p>Даём гарантию на все виды работ — 24 месяца.</p></div>
+                <div class="why-card tilt-card fade-up delay-3"><span class="icon">🤝</span><h4>Честно</h4><p>Цена фиксируется до начала работ. Никаких сюрпризов.</p></div>
+                <div class="why-card tilt-card fade-up delay-4"><span class="icon">🧹</span><h4>Аккуратно</h4><p>Работаем в чистой обуви. Убираем за собой.</p></div>
             </div>
         </section>
 
@@ -720,17 +805,17 @@ async def home(request: Request):
         <section class="promo-section" id="promo">
             <h2 class="section-title fade-up"><i class="fas fa-fire" style="color: #FF8C00;"></i>Наши акции</h2>
             <div class="promo-grid">
-                <div class="promo-card fade-up delay-1">
+                <div class="promo-card tilt-card fade-up delay-1">
                     <span class="tag">Скидка</span>
                     <h3>10%</h3>
                     <p>По промокоду <strong style="color: #FFD700;">DONERIGHT10</strong> на первый заказ</p>
                 </div>
-                <div class="promo-card fade-up delay-2">
+                <div class="promo-card tilt-card fade-up delay-2">
                     <span class="tag">Бонус</span>
                     <h3>Приведи друга</h3>
                     <p>Получите скидку 10% на следующий заказ, если порекомендуете нас другу</p>
                 </div>
-                <div class="promo-card fade-up delay-3">
+                <div class="promo-card tilt-card fade-up delay-3">
                     <span class="tag">Акция</span>
                     <h3>Пенсионерам</h3>
                     <p>Скидка 10% на все услуги для пенсионеров Железногорска</p>
@@ -742,9 +827,9 @@ async def home(request: Request):
         <section class="reviews-section" id="reviews">
             <h2 class="section-title fade-up"><i class="fas fa-comment-dots"></i>Что говорят клиенты в Железногорске</h2>
             <div class="reviews-carousel">
-                <div class="review-card fade-up delay-1"><span class="stars">★★★★★</span><p class="text">"Сантехника работала отлично. Приехали быстро, сделали качественно. Оплатил только после проверки. Спасибо!"</p><div class="author">— Александр, <span>Железногорск</span></div></div>
-                <div class="review-card fade-up delay-2"><span class="stars">★★★★★</span><p class="text">"Собрали мебель. Всё чётко, аккуратно. Мастер пришёл со своим инструментом. Рекомендую!"</p><div class="author">— Екатерина, <span>Железногорск</span></div></div>
-                <div class="review-card fade-up delay-3"><span class="stars">★★★★★</span><p class="text">"Электрику делали. Всё проверили, дали гарантию. Очень удобно, что платить можно после результата."</p><div class="author">— Дмитрий, <span>Железногорск</span></div></div>
+                <div class="review-card tilt-card fade-up delay-1"><span class="stars">★★★★★</span><p class="text">"Сантехника работала отлично. Приехали быстро, сделали качественно. Оплатил только после проверки. Спасибо!"</p><div class="author">— Александр, <span>Железногорск</span></div></div>
+                <div class="review-card tilt-card fade-up delay-2"><span class="stars">★★★★★</span><p class="text">"Собрали мебель. Всё чётко, аккуратно. Мастер пришёл со своим инструментом. Рекомендую!"</p><div class="author">— Екатерина, <span>Железногорск</span></div></div>
+                <div class="review-card tilt-card fade-up delay-3"><span class="stars">★★★★★</span><p class="text">"Электрику делали. Всё проверили, дали гарантию. Очень удобно, что платить можно после результата."</p><div class="author">— Дмитрий, <span>Железногорск</span></div></div>
             </div>
         </section>
 
@@ -752,22 +837,22 @@ async def home(request: Request):
         <section class="steps-section" id="steps">
             <h2 class="section-title fade-up"><i class="fas fa-route"></i>Как мы работаем</h2>
             <div class="steps-grid">
-                <div class="step-card fade-up delay-1">
+                <div class="step-card tilt-card fade-up delay-1">
                     <div class="step-number">1</div>
                     <h4>Заявка</h4>
                     <p>Оставляете заявку на сайте или по телефону</p>
                 </div>
-                <div class="step-card fade-up delay-2">
+                <div class="step-card tilt-card fade-up delay-2">
                     <div class="step-number">2</div>
                     <h4>Оценка</h4>
                     <p>Оцениваем объём работ и называем точную цену</p>
                 </div>
-                <div class="step-card fade-up delay-3">
+                <div class="step-card tilt-card fade-up delay-3">
                     <div class="step-number">3</div>
                     <h4>Работа</h4>
                     <p>Выполняем задачу качественно и в срок</p>
                 </div>
-                <div class="step-card fade-up delay-4">
+                <div class="step-card tilt-card fade-up delay-4">
                     <div class="step-number">4</div>
                     <h4>Оплата</h4>
                     <p>Вы проверяете результат и платите только после одобрения</p>
@@ -777,9 +862,9 @@ async def home(request: Request):
 
         <!-- ГАРАНТИИ -->
         <section class="guarantees" id="guarantees">
-            <div class="guarantee-card fade-up delay-1"><span class="icon">💰</span><h3>Платите после</h3><p>Вы принимаете работу лично. Только после этого — оплата на реквизиты компании. Без скрытых комиссий и предоплат.</p></div>
-            <div class="guarantee-card fade-up delay-2"><span class="icon">🛡️</span><h3>Гарантия качества</h3><p>Сделали криво? Мы исправим за свой счёт или вернём деньги. У вас есть 24 часа на проверку.</p></div>
-            <div class="guarantee-card fade-up delay-3"><span class="icon">📄</span><h3>Работаем по закону</h3><p>Для заказов от 10 000 ₽ заключаем официальный договор. Мы несём ответственность, а не случайный мастер.</p></div>
+            <div class="guarantee-card tilt-card fade-up delay-1"><span class="icon">💰</span><h3>Платите после</h3><p>Вы принимаете работу лично. Только после этого — оплата на реквизиты компании. Без скрытых комиссий и предоплат.</p></div>
+            <div class="guarantee-card tilt-card fade-up delay-2"><span class="icon">🛡️</span><h3>Гарантия качества</h3><p>Сделали криво? Мы исправим за свой счёт или вернём деньги. У вас есть 24 часа на проверку.</p></div>
+            <div class="guarantee-card tilt-card fade-up delay-3"><span class="icon">📄</span><h3>Работаем по закону</h3><p>Для заказов от 10 000 ₽ заключаем официальный договор. Мы несём ответственность, а не случайный мастер.</p></div>
         </section>
 
         <!-- НАС РЕКОМЕНДУЮТ -->
@@ -841,14 +926,6 @@ async def home(request: Request):
                     <div class="question"><span>Что если что-то пошло не так?</span><span class="arrow">▼</span></div>
                     <div class="answer">У вас есть 24 часа на проверку. Если работа выполнена некачественно — мы переделаем или вернём деньги.</div>
                 </div>
-                <div class="faq-item fade-up delay-4">
-                    <div class="question"><span>Как я могу оплатить услуги?</span><span class="arrow">▼</span></div>
-                    <div class="answer">Оплата производится только после полного выполнения работы. Принимаем на реквизиты компании (по номеру телефона, карте или ссылке). Передача денег мастеру на руки запрещена.</div>
-                </div>
-                <div class="faq-item fade-up delay-5">
-                    <div class="question"><span>Что если мастер сломал что-то?</span><span class="arrow">▼</span></div>
-                    <div class="answer">Мы несём полную ответственность за свои действия. Всё исправим за свой счёт или компенсируем ущерб.</div>
-                </div>
             </div>
         </section>
 
@@ -891,34 +968,26 @@ async def home(request: Request):
         </div>
     </div>
 
-    <!-- ПОПАП ПОЛИТИКИ КОНФИДЕНЦИАЛЬНОСТИ -->
+    <!-- ПОПАП ПОЛИТИКИ -->
     <div class="popup-overlay" id="policyPopup">
         <div class="popup" style="max-width: 700px; text-align: left; max-height: 80vh; overflow-y: auto;">
             <span class="icon" style="font-size: 48px;">📋</span>
             <h2 style="text-align: center;">Политика обработки персональных данных</h2>
             <div style="color: #D1D5DB; font-size: 14px; line-height: 1.8; margin: 20px 0;">
-
                 <p><strong>1. Общие положения</strong></p>
                 <p>Настоящая политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных» и определяет порядок обработки персональных данных и меры по обеспечению безопасности персональных данных, предпринимаемые ООО «ДОНРАЙТ» (далее – Оператор).</p>
-
                 <p><strong>2. Какие данные мы собираем</strong></p>
                 <p>При оформлении заявки на сайте мы собираем следующие персональные данные: имя, телефон, адрес объекта и описание задачи.</p>
-
                 <p><strong>3. Цели обработки данных</strong></p>
                 <p>Ваши данные используются исключительно для: связи с вами, уточнения деталей заказа, формирования коммерческого предложения и выполнения обязательств по договору.</p>
-
                 <p><strong>4. Правовые основания</strong></p>
                 <p>Обработка данных осуществляется на основании вашего согласия, которое вы даёте, заполняя форму заявки на сайте.</p>
-
                 <p><strong>5. Сроки хранения</strong></p>
                 <p>Ваши данные хранятся в течение срока, необходимого для выполнения заказа, и в течение 3 лет после завершения работ для юридической защиты сторон.</p>
-
                 <p><strong>6. Передача данных третьим лицам</strong></p>
                 <p>Мы не передаём ваши данные третьим лицам, за исключением случаев, предусмотренных законодательством РФ.</p>
-
                 <p><strong>7. Ваши права</strong></p>
                 <p>Вы имеете право отозвать своё согласие на обработку данных в любой момент, направив письменное уведомление на адрес: doneright.st@gmail.com.</p>
-
                 <p><strong>8. Контакты</strong></p>
                 <p>По всем вопросам, связанным с обработкой ваших данных, вы можете обратиться к нам по email: doneright.st@gmail.com.</p>
             </div>
@@ -930,7 +999,7 @@ async def home(request: Request):
     <button class="scroll-top" id="scrollTopBtn"><i class="fas fa-arrow-up"></i></button>
 
     <script>
-        // Счётчик (исправлен на 34)
+        // ===== СЧЁТЧИК (34) =====
         const counterEl = document.getElementById('counter');
         let count = 0;
         const target = 34;
@@ -944,7 +1013,63 @@ async def home(request: Request):
             }
         }, 50);
 
-        // Кнопка наверх
+        // ===== АНИМАЦИЯ ПРИ СКРОЛЛЕ (Intersection Observer) =====
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-up').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ===== 3D-НАКЛОН КАРТОЧЕК =====
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'rotateX(0) rotateY(0) scale(1)';
+            });
+        });
+
+        // ===== ИНТЕРАКТИВНЫЕ ЧАСТИЦЫ =====
+        const container = document.getElementById('particleContainer');
+        const particles = [];
+        for (let i = 0; i < 40; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.top = Math.random() * 100 + '%';
+            p.style.width = (Math.random() * 4 + 2) + 'px';
+            p.style.height = p.style.width;
+            p.style.opacity = Math.random() * 0.3 + 0.1;
+            p.style.animation = `float ${Math.random() * 10 + 10}s ease-in-out infinite`;
+            container.appendChild(p);
+            particles.push(p);
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            particles.forEach((p, i) => {
+                const offsetX = (x - 50) * 0.02 * (i % 5) / 2;
+                const offsetY = (y - 50) * 0.02 * (i % 7) / 2;
+                p.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+            });
+        });
+
+        // ===== КНОПКА НАВЕРХ =====
         const scrollBtn = document.getElementById('scrollTopBtn');
         window.addEventListener('scroll', () => {
             scrollBtn.classList.toggle('visible', window.scrollY > 300);
@@ -953,7 +1078,7 @@ async def home(request: Request):
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // Плавный скролл
+        // ===== ПЛАВНЫЙ СКРОЛЛ =====
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
@@ -966,14 +1091,14 @@ async def home(request: Request):
             });
         });
 
-        // FAQ аккордеон
+        // ===== FAQ АККОРДЕОН =====
         document.querySelectorAll('.faq-item').forEach(item => {
             item.addEventListener('click', function() {
                 this.classList.toggle('active');
             });
         });
 
-        // Попап после отправки
+        // ===== ФОРМА (ПОЧИНЕНА) =====
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -987,10 +1112,13 @@ async def home(request: Request):
                 if (response.ok) {
                     document.getElementById('thankYouPopup').classList.add('active');
                     this.reset();
+                } else {
+                    alert('Ошибка при отправке. Попробуйте ещё раз.');
                 }
             })
             .catch(error => {
                 console.error('Ошибка:', error);
+                alert('Ошибка сети. Проверьте подключение.');
             });
         });
 
@@ -1004,7 +1132,7 @@ async def home(request: Request):
             }
         });
 
-        // ===== ПОПАП ПОЛИТИКИ =====
+        // ===== ПОЛИТИКА =====
         function openPolicyPopup() {
             document.getElementById('policyPopup').classList.add('active');
         }
@@ -1013,7 +1141,6 @@ async def home(request: Request):
             document.getElementById('policyPopup').classList.remove('active');
         }
 
-        // Открытие попапа политики по ссылкам
         document.getElementById('openPolicy').addEventListener('click', function(e) {
             e.preventDefault();
             openPolicyPopup();
@@ -1024,7 +1151,6 @@ async def home(request: Request):
             openPolicyPopup();
         });
 
-        // Закрытие попапа по клику вне его
         document.getElementById('policyPopup').addEventListener('click', function(e) {
             if (e.target === this) {
                 closePolicyPopup();
