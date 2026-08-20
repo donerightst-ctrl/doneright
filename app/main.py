@@ -6,7 +6,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-app = FastAPI(title="ДОНРАЙТ", version="2.0.0")
+app = FastAPI(title="ДОНРАЙТ", version="1.0.0")
 
 # ======== НАСТРОЙКИ ПОЧТЫ ========
 SMTP_SERVER = "smtp.gmail.com"
@@ -67,13 +67,11 @@ async def home(request: Request):
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
-            background: #050505;
+            background: #080808;
             color: #FFFFFF;
             line-height: 1.6;
             overflow-x: hidden;
         }
-
-        /* ===== 3D СЕТКА НА ФОНЕ ===== */
         .bg-grid {
             position: fixed;
             top: 0;
@@ -102,10 +100,13 @@ async def home(request: Request):
             0%, 100% { opacity: 0.5; transform: scale(1); }
             50% { opacity: 1; transform: scale(1.1); }
         }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
-
-        /* ===== АНИМАЦИИ ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
         .fade-up {
             opacity: 0;
             transform: translateY(60px);
@@ -118,7 +119,6 @@ async def home(request: Request):
         .delay-5 { animation-delay: 0.7s; }
         .delay-6 { animation-delay: 0.85s; }
         @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-
         @keyframes float {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
             50% { transform: translateY(-15px) rotate(2deg); }
@@ -131,8 +131,6 @@ async def home(request: Request):
             0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.1), 0 0 60px rgba(255, 215, 0, 0.05); }
             50% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.2), 0 0 80px rgba(255, 215, 0, 0.1); }
         }
-
-        /* ===== ШАПКА ===== */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -186,7 +184,6 @@ async def home(request: Request):
         }
         .nav a:hover { color: #fff; }
         .nav a:hover::after { width: 100%; }
-
         .btn-gold {
             background: linear-gradient(135deg, #FFD700, #FF8C00);
             color: #0A0A0A;
@@ -217,8 +214,6 @@ async def home(request: Request):
         }
         .btn-gold:hover::before { opacity: 1; transform: scale(1); }
         .btn-gold:hover { transform: scale(1.05) translateY(-2px); box-shadow: 0 0 60px rgba(255, 215, 0, 0.3); }
-
-        /* ===== ГЕРОЙ ===== */
         .hero {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -260,7 +255,6 @@ async def home(request: Request):
             margin-bottom: 16px;
         }
         .hero .city-tag i { margin-right: 6px; }
-
         .badge-group {
             display: flex;
             gap: 50px;
@@ -280,7 +274,6 @@ async def home(request: Request):
             margin: 0;
             letter-spacing: 0.3px;
         }
-
         .hero-image {
             background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.04) 0%, transparent 70%);
             border: 1px solid rgba(255, 215, 0, 0.06);
@@ -311,8 +304,6 @@ async def home(request: Request):
             font-weight: 600;
             margin-top: 20px;
         }
-
-        /* ===== СЧЁТЧИК ===== */
         .trust-counter {
             text-align: center;
             padding: 50px 0 70px;
@@ -327,8 +318,10 @@ async def home(request: Request):
             background-clip: text;
         }
         .trust-counter p { color: #9CA3AF; font-size: 18px; margin-top: 8px; }
-
-        /* ===== БЛОКИ ===== */
+        .why-section, .promo-section, .reviews-section, .steps-section, .faq-section, .trust-logos {
+            padding: 70px 0;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.05);
+        }
         .section-title {
             text-align: center;
             font-size: 40px;
@@ -337,7 +330,6 @@ async def home(request: Request):
             letter-spacing: -1.5px;
         }
         .section-title i { color: #FFD700; margin-right: 12px; }
-
         .why-grid, .promo-grid, .reviews-carousel, .steps-grid {
             display: grid;
             gap: 28px;
@@ -346,7 +338,6 @@ async def home(request: Request):
         .promo-grid { grid-template-columns: repeat(3, 1fr); }
         .reviews-carousel { grid-template-columns: repeat(3, 1fr); }
         .steps-grid { grid-template-columns: repeat(4, 1fr); }
-
         .why-card, .promo-card, .review-card, .step-card, .guarantee-card {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.04);
@@ -390,7 +381,6 @@ async def home(request: Request):
             align-items: center;
             justify-content: center;
         }
-
         .promo-card .tag {
             display: inline-block;
             background: #FFD700;
@@ -410,7 +400,6 @@ async def home(request: Request):
             color: #FFD700;
         }
         .promo-card p { color: #9CA3AF; font-size: 15px; }
-
         .review-card .stars {
             color: #FFD700;
             font-size: 18px;
@@ -431,7 +420,6 @@ async def home(request: Request):
             font-weight: 600;
         }
         .review-card .author span { color: #FFD700; }
-
         .guarantees {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -456,13 +444,6 @@ async def home(request: Request):
             transition: opacity 0.4s ease;
         }
         .guarantee-card:hover::before { opacity: 1; }
-
-        .why-section, .promo-section, .reviews-section, .steps-section, .faq-section, .trust-logos {
-            padding: 70px 0;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.05);
-        }
-
-        /* ===== FAQ ===== */
         .faq-grid { max-width: 800px; margin: 0 auto; }
         .faq-item {
             background: rgba(255, 255, 255, 0.02);
@@ -497,8 +478,6 @@ async def home(request: Request):
         }
         .faq-item.active .answer { max-height: 300px; padding-top: 16px; }
         .faq-item.active .question .arrow { transform: rotate(180deg); }
-
-        /* ===== ЛОГОТИПЫ ===== */
         .logos-grid {
             display: flex;
             justify-content: center;
@@ -515,8 +494,6 @@ async def home(request: Request):
         }
         .logos-grid .logo-item.gold { color: #FFD700; }
         .logos-grid .logo-item:hover { color: #FFD700; }
-
-        /* ===== КОНТАКТЫ ===== */
         .contacts-wrapper {
             display: flex;
             justify-content: center;
@@ -546,12 +523,9 @@ async def home(request: Request):
         }
         .contact-link i { font-size: 22px; }
         .contact-link .label { color: #fff; }
-
-        /* ===== ФОРМА ===== */
         .form-section { padding: 90px 0; text-align: center; }
         .form-section h2 { font-size: 44px; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 12px; }
         .form-section .sub { color: #9CA3AF; font-size: 18px; margin-bottom: 44px; }
-
         .form-box {
             max-width: 560px;
             margin: 0 auto;
@@ -592,8 +566,6 @@ async def home(request: Request):
             margin-top: 20px;
             text-align: center;
         }
-
-        /* ===== КНОПКА НАВЕРХ ===== */
         .scroll-top {
             position: fixed;
             bottom: 30px;
@@ -614,8 +586,6 @@ async def home(request: Request):
         }
         .scroll-top.visible { opacity: 1; visibility: visible; }
         .scroll-top:hover { transform: scale(1.1); box-shadow: 0 0 50px rgba(255, 215, 0, 0.3); }
-
-        /* ===== ПОПАП ===== */
         .popup-overlay {
             display: none;
             position: fixed;
@@ -642,7 +612,6 @@ async def home(request: Request):
         .popup .icon { font-size: 72px; display: block; margin-bottom: 20px; }
         .popup h2 { color: #FFD700; font-size: 28px; font-weight: 800; margin-bottom: 12px; }
         .popup p { color: #9CA3AF; font-size: 16px; margin-bottom: 30px; }
-
         footer {
             padding: 32px 0;
             border-top: 1px solid rgba(255, 255, 255, 0.04);
@@ -650,7 +619,20 @@ async def home(request: Request):
             display: flex;
             justify-content: space-between;
             font-size: 14px;
+            flex-wrap: wrap;
+            gap: 12px;
         }
+        footer a { color: #6B7280; text-decoration: none; transition: 0.3s; }
+        footer a:hover { color: #FFD700; }
+
+        /* Кнопка для политики */
+        .policy-link {
+            color: #6B7280;
+            text-decoration: none;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .policy-link:hover { color: #FFD700; }
 
         @media (max-width: 768px) {
             .hero { grid-template-columns: 1fr; gap: 40px; padding: 40px 0 60px; }
@@ -717,7 +699,7 @@ async def home(request: Request):
             </div>
         </section>
 
-        <!-- СЧЁТЧИК -->
+        <!-- СЧЁТЧИК ДОВЕРИЯ (ИСПРАВЛЕН) -->
         <section class="trust-counter fade-up delay-2">
             <div class="number" id="counter">0</div>
             <p><i class="fas fa-users" style="color: #FFD700; margin-right: 8px;"></i>человек в Железногорске уже доверили нам свои задачи</p>
@@ -734,12 +716,12 @@ async def home(request: Request):
             </div>
         </section>
 
-        <!-- ===== АКЦИИ (ОБНОВЛЕНЫ) ===== -->
+        <!-- АКЦИИ -->
         <section class="promo-section" id="promo">
             <h2 class="section-title fade-up"><i class="fas fa-fire" style="color: #FF8C00;"></i>Наши акции</h2>
             <div class="promo-grid">
                 <div class="promo-card fade-up delay-1">
-                    <span class="tag">Промокод</span>
+                    <span class="tag">Скидка</span>
                     <h3>10%</h3>
                     <p>По промокоду <strong style="color: #FFD700;">DONERIGHT10</strong> на первый заказ</p>
                 </div>
@@ -766,7 +748,7 @@ async def home(request: Request):
             </div>
         </section>
 
-        <!-- ===== КАК МЫ РАБОТАЕМ (ОБНОВЛЕН ШАГ 2) ===== -->
+        <!-- КАК МЫ РАБОТАЕМ -->
         <section class="steps-section" id="steps">
             <h2 class="section-title fade-up"><i class="fas fa-route"></i>Как мы работаем</h2>
             <div class="steps-grid">
@@ -800,7 +782,7 @@ async def home(request: Request):
             <div class="guarantee-card fade-up delay-3"><span class="icon">📄</span><h3>Работаем по закону</h3><p>Для заказов от 10 000 ₽ заключаем официальный договор. Мы несём ответственность, а не случайный мастер.</p></div>
         </section>
 
-        <!-- ===== НАС РЕКОМЕНДУЮТ (КРАСИВО) ===== -->
+        <!-- НАС РЕКОМЕНДУЮТ -->
         <section class="trust-logos fade-up delay-3">
             <div style="display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 30px;">
                 <span style="display: inline-block; width: 40px; height: 1px; background: linear-gradient(90deg, transparent, #FFD700);"></span>
@@ -818,7 +800,7 @@ async def home(request: Request):
             </div>
         </section>
 
-        <!-- ===== КОНТАКТЫ И ПОДДЕРЖКА (С ВАШИМИ ССЫЛКАМИ) ===== -->
+        <!-- КОНТАКТЫ -->
         <section class="trust-logos fade-up delay-2" style="border-bottom: none; padding: 40px 0 60px;">
             <div style="display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 40px;">
                 <span style="display: inline-block; width: 30px; height: 1px; background: linear-gradient(90deg, transparent, #FFD700);"></span>
@@ -827,21 +809,15 @@ async def home(request: Request):
                 </p>
                 <span style="display: inline-block; width: 30px; height: 1px; background: linear-gradient(90deg, #FFD700, transparent);"></span>
             </div>
-
             <div class="contacts-wrapper">
-                <!-- Почта -->
                 <a href="mailto:doneright.st@gmail.com" class="contact-link">
                     <i class="fas fa-envelope" style="color: #FFD700;"></i>
                     <span class="label">doneright.st@gmail.com</span>
                 </a>
-
-                <!-- ВКонтакте -->
                 <a href="https://vk.ru/doneright" target="_blank" class="contact-link">
                     <i class="fab fa-vk" style="color: #4C75A3;"></i>
                     <span class="label">Сообщество ВК</span>
                 </a>
-
-                <!-- Telegram -->
                 <a href="https://t.me/DoneRight_bot" target="_blank" class="contact-link">
                     <i class="fab fa-telegram-plane" style="color: #0088cc;"></i>
                     <span class="label">Telegram-бот</span>
@@ -865,6 +841,14 @@ async def home(request: Request):
                     <div class="question"><span>Что если что-то пошло не так?</span><span class="arrow">▼</span></div>
                     <div class="answer">У вас есть 24 часа на проверку. Если работа выполнена некачественно — мы переделаем или вернём деньги.</div>
                 </div>
+                <div class="faq-item fade-up delay-4">
+                    <div class="question"><span>Как я могу оплатить услуги?</span><span class="arrow">▼</span></div>
+                    <div class="answer">Оплата производится только после полного выполнения работы. Принимаем на реквизиты компании (по номеру телефона, карте или ссылке). Передача денег мастеру на руки запрещена.</div>
+                </div>
+                <div class="faq-item fade-up delay-5">
+                    <div class="question"><span>Что если мастер сломал что-то?</span><span class="arrow">▼</span></div>
+                    <div class="answer">Мы несём полную ответственность за свои действия. Всё исправим за свой счёт или компенсируем ущерб.</div>
+                </div>
             </div>
         </section>
 
@@ -883,14 +867,17 @@ async def home(request: Request):
                     <label><i class="fas fa-tools" style="color: #FFD700;"></i> Что нужно сделать?</label>
                     <textarea name="message" rows="4" placeholder="Опишите задачу как можно подробнее..."></textarea>
                     <button type="submit" class="btn-gold" style="width: 100%; text-align: center; padding: 16px; font-size: 16px;"><i class="fas fa-paper-plane"></i> Отправить заявку →</button>
-                    <div class="small-note"><i class="fas fa-check-circle" style="color: #FFD700;"></i> Никаких скрытых платежей. Цена фиксируется до начала работ.</div>
+                    <div class="small-note">
+                        <i class="fas fa-check-circle" style="color: #FFD700;"></i> Никаких скрытых платежей. Цена фиксируется до начала работ.<br>
+                        Нажимая «Отправить», вы соглашаетесь с <a href="#" id="openPolicy" style="color: #FFD700; text-decoration: underline;">политикой обработки персональных данных</a>.
+                    </div>
                 </form>
             </div>
         </section>
 
         <footer>
             <span>© 2026 ДОНРАЙТ. Работаем честно в Железногорске.</span>
-            <span><i class="fas fa-lock" style="margin-right: 6px;"></i>Политика конфиденциальности</span>
+            <span><a href="#" id="openPolicy2" style="color: #6B7280; text-decoration: none; transition: 0.3s;"><i class="fas fa-lock" style="margin-right: 6px;"></i>Политика конфиденциальности</a></span>
         </footer>
     </div>
 
@@ -904,23 +891,58 @@ async def home(request: Request):
         </div>
     </div>
 
+    <!-- ПОПАП ПОЛИТИКИ КОНФИДЕНЦИАЛЬНОСТИ -->
+    <div class="popup-overlay" id="policyPopup">
+        <div class="popup" style="max-width: 700px; text-align: left; max-height: 80vh; overflow-y: auto;">
+            <span class="icon" style="font-size: 48px;">📋</span>
+            <h2 style="text-align: center;">Политика обработки персональных данных</h2>
+            <div style="color: #D1D5DB; font-size: 14px; line-height: 1.8; margin: 20px 0;">
+
+                <p><strong>1. Общие положения</strong></p>
+                <p>Настоящая политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных» и определяет порядок обработки персональных данных и меры по обеспечению безопасности персональных данных, предпринимаемые ООО «ДОНРАЙТ» (далее – Оператор).</p>
+
+                <p><strong>2. Какие данные мы собираем</strong></p>
+                <p>При оформлении заявки на сайте мы собираем следующие персональные данные: имя, телефон, адрес объекта и описание задачи.</p>
+
+                <p><strong>3. Цели обработки данных</strong></p>
+                <p>Ваши данные используются исключительно для: связи с вами, уточнения деталей заказа, формирования коммерческого предложения и выполнения обязательств по договору.</p>
+
+                <p><strong>4. Правовые основания</strong></p>
+                <p>Обработка данных осуществляется на основании вашего согласия, которое вы даёте, заполняя форму заявки на сайте.</p>
+
+                <p><strong>5. Сроки хранения</strong></p>
+                <p>Ваши данные хранятся в течение срока, необходимого для выполнения заказа, и в течение 3 лет после завершения работ для юридической защиты сторон.</p>
+
+                <p><strong>6. Передача данных третьим лицам</strong></p>
+                <p>Мы не передаём ваши данные третьим лицам, за исключением случаев, предусмотренных законодательством РФ.</p>
+
+                <p><strong>7. Ваши права</strong></p>
+                <p>Вы имеете право отозвать своё согласие на обработку данных в любой момент, направив письменное уведомление на адрес: doneright.st@gmail.com.</p>
+
+                <p><strong>8. Контакты</strong></p>
+                <p>По всем вопросам, связанным с обработкой ваших данных, вы можете обратиться к нам по email: doneright.st@gmail.com.</p>
+            </div>
+            <button class="btn-gold" onclick="closePolicyPopup()" style="width: 100%; text-align: center; padding: 14px;"><i class="fas fa-check"></i> Закрыть</button>
+        </div>
+    </div>
+
     <!-- КНОПКА НАВЕРХ -->
     <button class="scroll-top" id="scrollTopBtn"><i class="fas fa-arrow-up"></i></button>
 
     <script>
-        // Счётчик
+        // Счётчик (исправлен на 34)
         const counterEl = document.getElementById('counter');
         let count = 0;
-        const target = 1247;
+        const target = 34;
         const interval = setInterval(() => {
             if (count < target) {
-                count += Math.floor(target / 100) + 1;
+                count += Math.floor(target / 20) + 1;
                 if (count > target) count = target;
                 counterEl.textContent = count.toLocaleString();
             } else {
                 clearInterval(interval);
             }
-        }, 30);
+        }, 50);
 
         // Кнопка наверх
         const scrollBtn = document.getElementById('scrollTopBtn');
@@ -979,6 +1001,33 @@ async def home(request: Request):
         document.getElementById('thankYouPopup').addEventListener('click', function(e) {
             if (e.target === this) {
                 closePopup();
+            }
+        });
+
+        // ===== ПОПАП ПОЛИТИКИ =====
+        function openPolicyPopup() {
+            document.getElementById('policyPopup').classList.add('active');
+        }
+
+        function closePolicyPopup() {
+            document.getElementById('policyPopup').classList.remove('active');
+        }
+
+        // Открытие попапа политики по ссылкам
+        document.getElementById('openPolicy').addEventListener('click', function(e) {
+            e.preventDefault();
+            openPolicyPopup();
+        });
+
+        document.getElementById('openPolicy2').addEventListener('click', function(e) {
+            e.preventDefault();
+            openPolicyPopup();
+        });
+
+        // Закрытие попапа по клику вне его
+        document.getElementById('policyPopup').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePolicyPopup();
             }
         });
     </script>
