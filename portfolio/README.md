@@ -2,6 +2,21 @@
 
 Small, inspectable projects used as practical work samples.
 
+## Fixed-scope starter offers
+
+These are intentionally small first milestones so a buyer can verify the result before committing to a larger project.
+
+| Deliverable | Starter price | Typical first milestone |
+| --- | ---: | --- |
+| CSV / Excel cleanup or transformation | $20 | Clean, normalize, deduplicate, and export a reproducible result |
+| API / webhook integration diagnostic + fix | $25 | Reproduce the issue, implement one bounded integration/fix, document handoff |
+| Lead capture + webhook backend | $35 | FastAPI endpoint, validation, persistence, webhook notification, Docker |
+| Telegram bot adaptation | $40 | Adapt the existing Python bot base to one clearly scoped workflow |
+| Lead triage / routing automation | $25 | Deterministic scoring/normalization and JSON output for CRM/n8n/Make |
+| Small AI/API automation prototype | $50 | One working end-to-end automation with explicit inputs/outputs and setup notes |
+
+Prices are starter milestones, not promises for unlimited scope. Credentials, hosting costs, paid APIs, and production hardening are quoted separately. No access keys or secrets belong in source code.
+
 ## 1. TypeScript Agent Tool-Loop Harness
 **TypeScript · Agent loops · Tool allowlisting · Validation · Deterministic tests**
 
