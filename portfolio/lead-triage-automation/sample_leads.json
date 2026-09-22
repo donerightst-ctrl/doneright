@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Anna",
+    "email": "ANNA@example.com",
+    "company": "Northwind",
+    "source": "referral",
+    "budget": 1800,
+    "message": "We need an automation integration and would like a demo."
+  },
+  {
+    "name": "Max",
+    "email": "max@example.com",
+    "source": "organic",
+    "message": "Just exploring options."
+  }
+]
